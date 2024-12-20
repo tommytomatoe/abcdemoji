@@ -9,6 +9,8 @@
     </button>
     <input
       ref="inputEl"
+      id="gameInput"
+      name="gameInput"
       type="text"
       inputmode="text"
       pattern="[A-Za-z0-9]*"
