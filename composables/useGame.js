@@ -7,6 +7,7 @@ export const useGame = () => {
   const currentItems = ref({})
   const activeKeys = ref(new Set())
   const isFirstKey = ref(true)
+  const lastLetterItem = ref(null)
   const timeoutRef = ref(null)
   const inputRef = ref(null)
   let animationTimer = null
@@ -51,7 +52,9 @@ export const useGame = () => {
       item = currentItems.value[key]
     } else {
       const items = letterMap[key]
-      item = items[Math.floor(Math.random() * items.length)]
+      // Prevent item from picking the same one just used by filtering it out:
+      const itemsExcludingLast = items.filter(i => i.name !== lastLetterItem.value?.name)
+      item = itemsExcludingLast[Math.floor(Math.random() * itemsExcludingLast.length)]
       currentItems.value = { ...currentItems.value, [key]: item }
     }
 
@@ -61,6 +64,7 @@ export const useGame = () => {
       isNumber: false
     }
     createAnimation(item)
+    lastLetterItem.value = item
   }
 
   const handleNumberKey = (key) => {
