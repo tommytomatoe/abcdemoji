@@ -7,6 +7,7 @@ export const useGame = () => {
   const currentItems = ref({})
   const activeKeys = ref(new Set())
   const isFirstKey = ref(true)
+  const lastItemName = ref(null)
   const timeoutRef = ref(null)
   const inputRef = ref(null)
   let animationFrameId = null
@@ -75,9 +76,10 @@ export const useGame = () => {
     if (activeKeys.value.has(key)) {
       item = currentItems.value[key]
     } else {
-      const items = letterMap[key]
+      const items = letterMap[key].filter(i => i.name !== lastItemName.value)
       item = items[Math.floor(Math.random() * items.length)]
       currentItems.value = { ...currentItems.value, [key]: item }
+      lastItemName.value = item.name
     }
 
     pressedKey.value = {
