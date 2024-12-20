@@ -1,6 +1,10 @@
-# Nuxt Minimal Starter
+# abcdEmoji
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A fun game to learn your numbers and letters. Built with Nuxt 3.
+
+Check out the live game here: [abcdEmoji on Netlify](https://abcdemoji.netlify.app/).
+
+Made with love in Knoxville, TN for my babies.
 
 ## Setup
 
