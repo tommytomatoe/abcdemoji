@@ -9,7 +9,8 @@ export const useGame = () => {
   const isFirstKey = ref(true)
   const timeoutRef = ref(null)
   const inputRef = ref(null)
-  let animationTimer = null
+  let animationFrameId = null
+  let lastTime = 0
 
   const createAnimation = (item) => {
     const newAnimation = {
@@ -18,9 +19,33 @@ export const useGame = () => {
       name: item.name,
       x: Math.random() * (window.innerWidth - 60),
       y: Math.random() * (window.innerHeight - 60),
-      opacity: 1
+      opacity: 1,
+      createdAt: Date.now()
     }
     animations.value = [...animations.value, newAnimation]
+  }
+
+  const updateAnimations = (timestamp) => {
+    if (!lastTime) lastTime = timestamp
+    const delta = timestamp - lastTime
+    
+    // Only update if enough time has passed (targeting 60fps)
+    if (delta > 16) {
+      animations.value = animations.value
+        .filter(a => a.opacity > 0.01)
+        .map(a => ({
+          ...a,
+          opacity: a.opacity - (0.3 * (delta / 1000)) // Scale fade with time delta
+        }))
+
+      if (animations.value.length === 0 && !isFirstKey.value) {
+        isFirstKey.value = true
+      }
+
+      lastTime = timestamp
+    }
+
+    animationFrameId = requestAnimationFrame(updateAnimations)
   }
 
   const focusInput = () => {
@@ -153,29 +178,21 @@ export const useGame = () => {
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('keyup', handleKeyUp)
 
-    // Start animation timer
-    animationTimer = setInterval(() => {
-      animations.value = animations.value
-        .filter(a => a.opacity > 0)
-        .map(a => ({ ...a, opacity: a.opacity - 0.005 }))
-
-      // Show instructions if all animations are gone
-      if (animations.value.length === 0 && !isFirstKey.value) {
-        isFirstKey.value = true
-      }
-    }, 50)
+    // Start animation frame loop
+    animationFrameId = requestAnimationFrame(updateAnimations)
   })
+
 
   onUnmounted(() => {
     window.removeEventListener('keydown', handleKeyDown)
     window.removeEventListener('keyup', handleKeyUp)
-
+    
     if (timeoutRef.value) {
       clearTimeout(timeoutRef.value)
     }
-
-    if (animationTimer) {
-      clearInterval(animationTimer)
+    
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId)
     }
   })
 
