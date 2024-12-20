@@ -1,6 +1,6 @@
 # abcdEmoji
 
-A fun game to learn your numbers and letters. Built with Nuxt 3.
+A fun game to learn your numbers and letters. Built with Nuxt 3. Probably a little engineered, but this is for fun so there's no rules.
 
 Check out the live game here: [abcdEmoji on Netlify](https://abcdemoji.netlify.app/).
 
