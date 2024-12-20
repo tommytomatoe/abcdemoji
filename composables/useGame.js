@@ -51,10 +51,8 @@ export const useGame = () => {
     if (activeKeys.value.has(key)) {
       item = currentItems.value[key]
     } else {
-      const items = letterMap[key]
-      // Prevent item from picking the same one just used by filtering it out:
-      const itemsExcludingLast = items.filter(i => i.name !== lastLetterItem.value?.name)
-      item = itemsExcludingLast[Math.floor(Math.random() * itemsExcludingLast.length)]
+      const items = letterMap[key].filter(i => i.name !== lastLetterItem.value?.name)
+      item = items[Math.floor(Math.random() * items.length)]
       currentItems.value = { ...currentItems.value, [key]: item }
     }
 
