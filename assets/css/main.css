@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+/* Ensure proper sizing for the Nuxt app */
+#__nuxt {
+  height: 100%;
+}
+
+/* Reset and base styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;}
+
+/* Game container */
+.game-container {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #60a5fa, #2563eb);
+  overflow: hidden;
+}
+
+/* Hills background */
+.hills-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.hill-back {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8rem;
+  background-color: #4ade80;
+  border-radius: 9999px 9999px 0 0;
+  transform: scale(1.25);
+}
+
+.hill-front {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6rem;
+  background-color: #22c55e;
+  border-radius: 9999px 9999px 0 0;
+  transform: scale(1.1);
+}
+
+/* Clouds */
+.cloud {
+  position: absolute;
+  background-color: white;
+  border-radius: 9999px;
+}
+
+.cloud-1 {
+  top: 2.5rem;
+  left: 25%;
+  width: 6rem;
+  height: 3rem;
+}
+
+.cloud-2 {
+  top: 5rem;
+  right: 25%;
+  width: 8rem;
+  height: 4rem;
+}
+
+.cloud-3 {
+  top: 10rem;
+  left: 33%;
+  width: 5rem;
+  height: 2.5rem;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  z-index: 40;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer span {
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(4px);
+}
+
+/* Vue transitions */
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
