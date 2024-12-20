@@ -7,7 +7,7 @@ export const useGame = () => {
   const currentItems = ref({})
   const activeKeys = ref(new Set())
   const isFirstKey = ref(true)
-  const lastLetterItem = ref(null)
+  const lastItemName = ref(null)
   const timeoutRef = ref(null)
   const inputRef = ref(null)
   let animationTimer = null
@@ -51,9 +51,10 @@ export const useGame = () => {
     if (activeKeys.value.has(key)) {
       item = currentItems.value[key]
     } else {
-      const items = letterMap[key].filter(i => i.name !== lastLetterItem.value?.name)
+      const items = letterMap[key].filter(i => i.name !== lastItemName.value)
       item = items[Math.floor(Math.random() * items.length)]
       currentItems.value = { ...currentItems.value, [key]: item }
+      lastItemName.value = item.name
     }
 
     pressedKey.value = {
@@ -62,7 +63,6 @@ export const useGame = () => {
       isNumber: false
     }
     createAnimation(item)
-    lastLetterItem.value = item
   }
 
   const handleNumberKey = (key) => {
