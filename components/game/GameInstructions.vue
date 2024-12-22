@@ -55,7 +55,7 @@
             
             <div class="flex items-start space-x-3">
               <span class="text-2xl">📱</span>
-              <p><strong>Mobile Users:</strong> Tap the "Type a letter or number!" button to bring up your keyboard</p>
+              <p><strong>Mobile Users:</strong> Tap the "Click to start!" button to bring up your keyboard</p>
             </div>
 
             <div class="mt-6 text-center">
